@@ -25,6 +25,7 @@ public class 十进制转换R进制 {
 
     @Test
     public void test_10_2(){
+        // 十进制转换2 3 进制
         System.out.println(convertToBaseR(4,2));
         System.out.println(convertToBaseR(4,3));
     }
