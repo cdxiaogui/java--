@@ -1,0 +1,13 @@
+4C8G机器
+
+-Dspring.profiles.active=beta,important,ht 
+-Xms6144m 
+-Xmx6144m 
+-Xmn3072m 
+-XX:MetaspaceSize=512m 
+-XX:MaxMetaspaceSize=512m 
+-XX:ParallelGCThreads=4 
+-XX:+UseConcMarkSweepGC 
+-XX:+CMSConcurrentMTEnabled 
+-XX:CMSInitiatingOccupancyFraction=80 
+-XX:+UseParNewGC
