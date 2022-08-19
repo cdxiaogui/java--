@@ -5,6 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,4 +32,12 @@ public class ScheduledExecutorServiceTest {
         System.out.println("end");
     }
 
+
+    @Test
+    public void tt(){
+        Map<String, String> m = new HashMap<>();
+        m.put(null,"1");
+        m.put("2","2");
+        System.out.println(m.get(null));
+    }
 }
