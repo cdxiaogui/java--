@@ -6,11 +6,11 @@
 
     /*!10001 SQL_NO_CACHE id from commission_enum  union   select  */
 
-    10001：mysql版本大于10001的执行
+    10001：这个是mysql版本号，大于等于10001，会执行
     SQL_NO_CACHE：sql不走缓存
     /*!  */ ：mysql特殊语法，会执行里面的语句，如下就是一个注入的例子
 
-    
+
     select /*!10001 SQL_NO_CACHE id from commission_enum  union   select  */ type  from commission_enum where id = 1
     ==================================================================================================================
 
