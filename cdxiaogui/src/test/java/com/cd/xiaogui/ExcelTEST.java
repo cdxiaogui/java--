@@ -1,5 +1,6 @@
 package com.cd.xiaogui;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ public class ExcelTEST {
 }
 
 @Slf4j
+@Data
 class A implements Runnable{
     Date date;
     int task;
