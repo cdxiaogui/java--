@@ -1,6 +1,7 @@
 package com.cd.xiaogui.tool;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 public class 十进制转换R进制 {
 
