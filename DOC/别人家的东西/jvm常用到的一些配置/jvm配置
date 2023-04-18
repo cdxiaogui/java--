@@ -11,3 +11,19 @@
 -XX:+CMSConcurrentMTEnabled 
 -XX:CMSInitiatingOccupancyFraction=80 
 -XX:+UseParNewGC
+
+
+
+-Xms5120m -Xmx5120m -Xmn2560m 
+-XX:MetaspaceSize=512m 
+-XX:MaxMetaspaceSize=512m 
+-XX:MaxDirectMemorySize=2048m 
+-XX:ParallelGCThreads=4 
+-XX:ConcGCThreads=2 
+-XX:CICompilerCount=3 
+-XX:+UseConcMarkSweepGC 
+-XX:+CMSConcurrentMTEnabled
+-XX:CMSInitiatingOccupancyFraction=80
+-XX:+UseParNewGC
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/Logs
