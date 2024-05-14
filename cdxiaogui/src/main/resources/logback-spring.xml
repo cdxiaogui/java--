@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="/export/Logs" />
+    <springProperty scope="context" name="LOG_FILE" source="logging.file" />
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root" />
+    <jmxConfigurator/>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!-- 时间滚动输出 level为 DEBUG 日志 -->
+    <appender name="file-all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 过滤掉TRACE和DEBUG级别的日志 -->
+            <level>INFO</level>
+        </filter>
+        <file>${LOG_PATH}/all.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/all.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>14GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger.%M\(%line\) %X{invokeNo}- %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+
+    <!--时间滚动输出 level为 ERROR日志-->
+    <appender name="file-error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_PATH}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/${LOG_FILE}-error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>4GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger.%M\(%line\) %X{invokeNo}- %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <appender name="all-asyn" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="file-all"/>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+
+    <appender name="error-asyn" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="file-error"/>
+        <queueSize>512</queueSize>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <logger name="com.jd.omni.commission" level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="all-asyn"/>
+        <appender-ref ref="error-asyn"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <springProfile name="test">
+        <logger name="com.jd.jsf" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="org.hibernate" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="org.springframework" level="info" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="com.jd.laf" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="io.netty" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="com.jd.jim" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="org.apache.velocity" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <logger name="org.apache.kafka" level="error" additivity="false">
+            <appender-ref ref="stdout"/>
+        </logger>
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="stdout"/>
+            <appender-ref ref="all-asyn"/>
+            <appender-ref ref="error-asyn"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="pre">
+        <logger name="com.jd.jsf" level="INFO" additivity="false">
+            <appender-ref ref="all-asyn"/>
+            <appender-ref ref="error-asyn"/>
+            <appender-ref ref="stdout"/>
+        </logger>
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="stdout"/>
+            <appender-ref ref="all-asyn"/>
+            <appender-ref ref="error-asyn"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.jd.jsf" level="INFO" additivity="false">
+            <appender-ref ref="all-asyn"/>
+            <appender-ref ref="error-asyn"/>
+            <appender-ref ref="stdout"/>
+        </logger>
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="stdout"/>
+            <appender-ref ref="all-asyn"/>
+            <appender-ref ref="error-asyn"/>
+        </root>
+    </springProfile>
+</configuration>
