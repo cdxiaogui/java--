@@ -16,13 +16,13 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <artifactId>xiaogui</artifactId>
-            <groupId>com.cd</groupId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <artifactId>xiaogui</artifactId>-->
+<!--            <groupId>com.cd</groupId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 
     <build>
         <plugins>

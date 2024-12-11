@@ -1,8 +1,7 @@
 package com.cd.xiaogui.java.io.Nio;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.util.CollectionUtils;
+import org.junit.Test;
 
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;

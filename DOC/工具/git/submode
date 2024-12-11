@@ -1,0 +1,8 @@
+1、clone父项目代码
+git clone git@coding.jd.com:omni-bmall-operate/omni-operate-manage.git
+2、进入到项目里面
+cd omni-operate-manage
+3、初始化空间
+git submodule init
+4、更新子项目代码
+git submodule update --recursive --remote
