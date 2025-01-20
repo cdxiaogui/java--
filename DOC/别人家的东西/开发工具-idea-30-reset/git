@@ -18,7 +18,7 @@ git submodule update --recursive --remote
 3、合并
     进入feature_B的目录
     git merge feature_A
-    这个操作会把feature_A的提交全部拉到feature_B，
+    这个操作会把feature_A的提交全部拉到feature_B（为了不污染feature_A分支，不确定风险的时候，拉一个新分支去处理）
 4、基于master分支，把feature_B分支多余的提交记录全部放弃，之后就需要重新提交代码了
     git reset --soft $(git merge-base feature_B master)
 5、正常提交代码，这个时候，所有的代码改动都处于未提交状态了。
