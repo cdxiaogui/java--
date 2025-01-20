@@ -1,0 +1,24 @@
+
+一、gitsubmodule拉代码
+
+1、clone父项目代码
+git clone git@coding.jd.com:omni-bmall-operate/omni-operate-manage.git
+2、进入到项目里面
+cd omni-operate-manage
+3、初始化空间
+git submodule init
+4、更新子项目代码
+git submodule update --recursive --remote
+
+
+二、把一个分支的所有代码提交记录，创建一个新分支，合并成一个提交记录，
+
+0、原分支：feature_A
+1、基于master创建新分支【feature_B】
+3、合并
+    进入feature_B的目录
+    git merge feature_A
+    这个操作会把feature_A的提交全部拉到feature_B，
+4、基于master分支，把feature_B分支多余的提交记录全部放弃，之后就需要重新提交代码了
+    git reset --soft $(git merge-base feature_B master)
+5、正常提交代码，这个时候，所有的代码改动都处于未提交状态了。
